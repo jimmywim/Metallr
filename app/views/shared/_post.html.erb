@@ -25,7 +25,9 @@
 			<li>
  				<td><%= link_to 'Show', post %></td>
 			</li>
-
+			<li>
+					<a href="#">Reply</a>
+			</li>
 
 			<% if user_signed_in? && current_user.role == "admin" %>
 				<li>
@@ -34,6 +36,7 @@
 				<li>
 					 <td><%= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => "delete_post" %></td>
 				</li>
+
 			<% end %>
 		</ul>
 	</div>

@@ -29,7 +29,8 @@ gem 'role_model'
 # gem 'less-rails-bootstrap'
 gem 'therubyracer'
 gem 'figaro'
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.0.0'
+gem 'will_paginate-bootstrap'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

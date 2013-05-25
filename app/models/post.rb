@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
 
 	def self.search(keyword)
 		if keyword
-			find(:all, :conditions => ['content LIKE ?', "%#{keyword}%"])
+			find(:all, :conditions => ['content LIKE ?', "%#{keyword}%"], :order => "created_at DESC")
 		else
 			find(:all)
 		end

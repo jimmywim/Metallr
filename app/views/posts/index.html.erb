@@ -15,4 +15,5 @@
    <% @posts.each do |post| %>
     <%= render 'shared/post', :post => post %>
    <% end %>
+   <%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
 </section>

@@ -1,12 +1,14 @@
 <h3>
-	Results for: 
+	Results for: <%= params[:keyword] %>
 </h3>
 
 <% if @posts.size == 0 %>
 	No results
 <% else %>
+	<h4> Total results: <%= @posts.total_entries %> </h4>
 	<% @posts.each do |post| %>
 		<%= render 'shared/post', :post => post %>
 	<% end %>
-<% end %>
 
+	<%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
+<% end %>

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all(:order => "created_at DESC")
+    @posts = Post.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
     @post = Post.new
 
     respond_to do |format|
