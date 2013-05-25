@@ -1,0 +1,36 @@
+<div class="navbar navbar-inverse navbar-fixed-top">  
+  <div class="navbar-inner">  
+    <div class="container">  
+		<ul class="nav">
+			<li>
+				<%= link_to('Metallr', root_url) %>
+			</li>
+			<% if user_signed_in? %>
+			<li>
+				<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+			</li>
+			<li>
+				<%= link_to('Settings', edit_user_registration_path) %>
+			</li>
+				<% if current_user.role == "admin" %>
+				<li>
+					<%= link_to('User admin', users_path) %>
+				</li>
+				<% end %>
+			<% else %>
+			<li>
+				<%= link_to('Login', new_user_session_path)  %>  
+			</li>
+			<li>
+				<%= link_to('Create Account', new_user_registration_path) %>
+			</li>
+			<% end %>
+			<li>
+				<%= form_tag("/search/results", :action => "results", :method => "get", :class => "navbar-search pull-left") do %>
+					<%= text_field_tag :keyword, params[:keyword], :class => "search-query", :placeholder => "Search" %>
+				<% end %> 
+			</li>
+		</ul>
+    </div>  
+  </div>  
+</div>  

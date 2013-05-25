@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h4>
+	<% if @post.user.nil? %>
+		Unknown user
+	<% else %>
+	  <%= @post.user.username %>
+	<% end %>
+</h4>
+
+<p>
+	<div class="well">
+  		<%= @post.content %>
+	</div>
+</p>
+<div>
+	<em>
+		<%= @post.created_at.strftime("%m/%d/%Y - %I:%M %p") %>
+	</em>
+</div>
+
+<ul class="nav nav-pills">
+	<% if user_signed_in? && current_user.role == "admin" %>
+	<li>
+		<%= link_to 'Edit', edit_post_path(@post) %>
+	</li>
+	<% end %>
+	<li>
+		<%= link_to 'Back', posts_path %>
+	</li>
+</ul>
+
+
+
+
+

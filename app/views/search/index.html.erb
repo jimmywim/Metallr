@@ -1,0 +1,4 @@
+<%= form_tag("/search/results", :action => "results", :method => "get") do %>
+	<%= text_field_tag :keyword, params[:keyword] %><br />
+	<%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
+<% end %>

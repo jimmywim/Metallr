@@ -1,0 +1,22 @@
+<p>
+	Showing:
+	<%= @user.username %>
+</p>
+
+
+<p>
+	Role:
+	<% if @user.role.empty? %>
+		No Roles!
+	<% else %>
+
+	<%= @user.role %>	
+
+	<% end %>
+</p>
+
+<section id="posts-listing">
+   <% @user.posts.each do |post| %>
+    <%= render 'shared/post', :post => post %>
+   <% end %>
+</section>

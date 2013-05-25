@@ -1,0 +1,40 @@
+<article>
+
+	<div class="well">
+		<p>
+			<span class="post-user">
+				<% if post.user.nil? %>
+					<strong>Unknown user</strong>
+				<% else %>
+					<%= link_to post.user.username, post.user %>
+				<% end %>
+				:
+			</span>
+			<span class="post-timestamp">
+				<em>
+					<%= post.created_at.strftime("%m/%d/%Y - %I:%M %p") %>
+				</em>
+			</span>
+			<div>
+				<%= post.content %>
+			</div>
+		</p>
+	</div>
+	<div class="">
+		<ul class="nav nav-pills">
+			<li>
+ 				<td><%= link_to 'Show', post %></td>
+			</li>
+
+
+			<% if user_signed_in? && current_user.role == "admin" %>
+				<li>
+					<td><%= link_to 'Edit', edit_post_path(post) %></td>
+				</li>
+				<li>
+					 <td><%= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => "delete_post" %></td>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</article>

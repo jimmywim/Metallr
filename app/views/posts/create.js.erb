@@ -1,0 +1,5 @@
+var newRowContent = $("<%= escape_javascript(render :partial => 'shared/post', :locals => {:post => @post} ) %>");
+
+$(newRowContent).insertBefore('#posts-listing > article:first');
+
+$('#post_content').val('');
