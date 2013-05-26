@@ -6,6 +6,8 @@ Metallr::Application.routes.draw do
   end
   resources :users, :only => [:edit, :index, :show, :update, :destroy]
 
+  match "/replies", :controller => "posts", :action => "replies"
+  match "/posts/my", :controller => "posts", :action => "my"
   resources :posts
 
   match "/search/results", :controller => "search", :action => "results"

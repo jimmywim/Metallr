@@ -12,6 +12,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def my
+    @posts = Post.where("user_id = ?", current_user.id).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    @post = Post.new
+
+    respond_to do |format|
+      format.html # my.html.erb
+      format.json { render :json => @posts }
+    end
+  end
+
+  def replies
+    @posts = Post.where("content LIKE ?", "%#{current_user.username}%").order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    @post = Post.new
+
+    respond_to do |format|
+      format.html # replies.html.erb
+      format.json { render :json => @posts }
+    end
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show
