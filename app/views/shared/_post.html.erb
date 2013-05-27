@@ -26,7 +26,11 @@
  				<td><%= link_to 'Show', post %></td>
 			</li>
 			<li>
-					<a href="#">Reply</a>
+					<a href="#" class="reply_link" 
+						data-reply-to="<%= post.user.username %>"
+						data-reply-post="<%= post.id %>">
+						Reply
+					</a>
 			</li>
 
 			<% if user_signed_in? && current_user.role == "admin" %>

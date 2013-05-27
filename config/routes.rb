@@ -1,20 +1,44 @@
 Metallr::Application.routes.draw do
+  
+  # posts
+  match "/replies" => "posts#replies"
+  match "/posts/my" => "posts#my"
+  match "/posts/idols" => "posts#idols"
+  match "/posts/groupies" => "posts#groupies"
+  resources :posts
+
+
+  # users
+  match "idols" => "users#idols"
+  match "groupies" => "users#groupies"
+
   devise_for :users
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
-  resources :users, :only => [:edit, :index, :show, :update, :destroy]
 
-  match "/replies", :controller => "posts", :action => "replies"
-  match "/posts/my", :controller => "posts", :action => "my"
-  resources :posts
+  
+  match "users/:id/idols" => "users#idols", :as => "user_idols"
+  #match "users/:id/idols/posts" => "posts#idols", :as => "user_idols_posts"
 
-  match "/search/results", :controller => "search", :action => "results"
-  resources :search
+  match "users/:id/groupies" => "users#groupies", :as => "user_groupies"
+  #match "users/:id/groupies/posts" => "posts#groupies", :as => "user_groupies_posts"
+  resources :users do
+    member do
+      get 'idolize'
+      get 'unidolize'
+      match "idols/posts" => "posts#idols"
+      match "groupies/posts" => "posts#groupies"
+    end
+  end
+  resources :users, :only => [:edit, :index, :show, :update, :destroy, :idolize, :unidolize]
 
+  # search
+  match "/search/results" => "search#results"
+
+  # root 
   get "home/index"
-
   root :to => "posts#index"
 
   

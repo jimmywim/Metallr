@@ -18,4 +18,10 @@ $(document).ready( function() {
 	$('.delete_post').bind('ajax:success', function() {  
 	    $(this).closest('article').fadeOut();  
 	});
+
+	$('.reply_link').click(function() {
+		var reply_to_username = $(this).data('reply-to');
+		$('#post_content').focus();
+		$('#post_content').val(reply_to_username + ", ");
+	});
 })

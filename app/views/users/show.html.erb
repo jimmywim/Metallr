@@ -1,7 +1,6 @@
-<p>
-	Showing:
-	<%= @user.username %>
-</p>
+<h3>
+	<%= @user.username %>'s Profile
+</h3>
 
 
 <p>
@@ -9,11 +8,35 @@
 	<% if @user.role.empty? %>
 		No Roles!
 	<% else %>
-
-	<%= @user.role %>	
-
+		<%= @user.role %>	
 	<% end %>
 </p>
+
+<div class="idols-panel">
+	<%= pluralize(@user.idols.count, "Idol") %>
+
+	<% unless @user.idols.count == 0 %>
+		<%= link_to "Show their idols", user_idols_path %>
+	<% end %>
+</div>
+
+<div class="groupies-panel">
+	<%= pluralize(@user.groupies.count, "Groupie") %>
+
+	<% unless @user.groupies.count == 0 %>
+		<%= link_to "Show their groupies", user_groupies_path %>
+	<% end %>
+</div>
+
+<div class="action-panel">
+	<% unless @user === current_user %>
+		<% if @user.idolized_by? current_user %>
+			<%= link_to "Un-idolize!", :controller => "users", :action => "unidolize", :remote => true %>
+		<% else %>
+			<%= link_to "Idolize!", :controller => "users", :action => "idolize", :remote => true %>
+		<% end %>
+	<% end %>
+</div>
 
 <section id="posts-listing">
    <% @user.posts.each do |post| %>

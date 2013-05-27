@@ -9,7 +9,7 @@ class Ability
     if user.role == "admin"
         can :manage, :all
     elsif user.role == "user"
-        can [:read], User
+        can [:read, :idols, :groupies, :idolize, :unidolize], User
     end
 
     #if user.has_role? :admin

@@ -32,6 +32,28 @@ class PostsController < ApplicationController
     end
   end
 
+  def idols
+    @user = current_user || User.find(params[:id])
+    @posts = Post.where("user_id" => @user.idols).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    @post = Post.new
+
+    respond_to do |format|
+      format.html # idols.html.erb
+      format.json { render :json => @posts }
+    end
+  end
+
+  def groupies
+    @user = current_user || User.find(params[:id])
+    @posts = Post.where("user_id" => @user.groupies).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    @post = Post.new
+
+    respond_to do |format|
+      format.html # groupies.html.erb
+      format.json { render :json => @posts }
+    end
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show

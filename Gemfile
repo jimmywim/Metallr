@@ -32,6 +32,8 @@ gem 'figaro'
 gem 'will_paginate', '~> 3.0.0'
 gem 'will_paginate-bootstrap'
 
+gem 'redis'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

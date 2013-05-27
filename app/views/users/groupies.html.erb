@@ -1,0 +1,13 @@
+
+<h2>
+	<% if @user.nil? %>
+		current_user.username
+	<% else %>
+		<%= @user.username %>
+	<% end %>
+	's Groupies
+</h2>
+
+<%= link_to "All posts by their groupies", groupies_posts_user_path %>
+
+<%= render "simplelist" %>

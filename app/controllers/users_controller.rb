@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
 	before_filter :skip_password_attribute, :only => :update
 
+    # basic CRUD
 	def index
 		@users = User.all
 		respond_to do |format|
@@ -49,4 +50,52 @@ class UsersController < ApplicationController
       		end
 		end
 	end
+
+	# Idols / Groupies
+	def idols
+		unless params[:id].nil?
+			@users = User.find(params[:id]).idols
+		else
+			@users = current_user.idols 
+		end
+
+		respond_to do |format|
+			format.html
+			format.json { render :json => @users }
+		end
+	end
+
+	def groupies
+		unless params[:id].nil?
+			@users = User.find(params[:id]).groupies
+		else
+			@users = current_user.groupies 
+		end
+
+		respond_to do |format|
+			format.html
+			format.json { render :json => @users }
+		end
+	end
+
+	def idolize
+		@user = User.find(params[:id])
+		current_user.idolize!(@user)
+		respond_to do |format|
+			format.html
+			format.json { render :nothing => true }
+			format.js 
+		end
+	end
+
+	def unidolize
+		@user = User.find(params[:id])
+		current_user.unidolize!(@user)
+
+		respond_to do |format|
+			format.html
+			format.json { render :nothing => true }
+			format.js 
+		end		
+	end	
 end
