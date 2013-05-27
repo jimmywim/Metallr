@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require bootstrap
 
 $(document).ready( function() { 
 	$('.delete_post').bind('ajax:success', function() {  

@@ -4,39 +4,54 @@
 		<ul class="nav">
 			<li>
 				<%= link_to('Metallr', root_url) %>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>Something</li>
+				</ul>
 			</li>
 			<% if user_signed_in? %>
-				<li>
-					<%= link_to('My Posts', posts_my_path) %>
+				<li class="dropdown">
+					<a data-target="#" data-toggle="dropdown">
+						Riffs
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to('My Riffs', posts_my_path) %>
+						</li>
+						<li>
+							<%= link_to('Replies to me', replies_path) %>
+						</li>
+					</ul>
 				</li>
-				<li>
-					<%= link_to('Replies', replies_path) %>
-				</li>
-				<li>
-					<%= link_to('Idols', idols_path) %>
-				</li>
-				<li>
-					<%= link_to('Groupies', groupies_path) %>
-				</li>
-				<li>
-					<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+				<li class="dropdown">
+					<a data-target="#" data-toggle="dropdown">
+						Metalheads
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to('My Idols', idols_path) %>
+						</li>
+						<li>
+							<%= link_to('My Groupies', groupies_path) %>
+						</li>
+					</ul>
 				</li>
 				<li>
 					<%= link_to('Settings', edit_user_registration_path) %>
 				</li>
-				<% if current_user.role == "admin" %>
 				<li>
-					<%= link_to('User admin', users_path) %>
+					<%= link_to('User admin', users_path) if admin? %>
 				</li>
-				<% end %>
 			<% else %>
-			<li>
-				<%= link_to('Login', new_user_session_path)  %>  
-			</li>
 			<li>
 				<%= link_to('Create Account', new_user_registration_path) %>
 			</li>
 			<% end %>
+			<li>
+				<%= link_to('Login', new_user_session_path) unless user_signed_in? %>  
+				<%= link_to('Logout', destroy_user_session_path, :method => :delete) if user_signed_in?  %>        
+			</li>
 			<li>
 				<%= form_tag("/search/results", :action => "results", :method => "get", :class => "navbar-search pull-left") do %>
 					<%= text_field_tag :keyword, params[:keyword], :class => "search-query", :placeholder => "Search" %>

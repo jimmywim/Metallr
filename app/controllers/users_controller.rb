@@ -25,9 +25,22 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	# delete user
+	# must also delete their posts
+	# and 'unidolize' their idols
 	def destroy
 	    @user = User.find(params[:id])
-	    @user.destroy
+	    @posts = Post.where("user_id = ?", @user.id)
+
+	    @user.idols.each do |i|
+	    	@user.unidolize(i)
+	    end
+
+	    @posts.each do |p|
+	    	p.destroy
+	    end
+
+	     @user.destroy
 
 	    respond_to do |format|
 	      format.html { redirect_to users_url }

@@ -39,6 +39,11 @@ Metallr::Application.routes.draw do
 
   # root 
   get "home/index"
+
+  authenticated :user do
+    root :to => "posts#idols"
+  end
+
   root :to => "posts#index"
 
   

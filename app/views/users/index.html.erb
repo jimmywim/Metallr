@@ -4,7 +4,7 @@
   <table id="users-table">
     <tr>
       <th>Username</th>
-      <th>Email</th>
+      <th><% if admin? %>Email<% end %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -13,13 +13,14 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.username %></td>
-      <td><%= user.email %></td>
+      <td><%= user.email if admin? %></td>
       <td><%= link_to 'Show', user %></td>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
-      <td><%= link_to 'Delete Forever', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :Class => "delete_user" %></td>
+
+      <td><%= link_to 'Edit', edit_user_path(user) if admin?%></td>
+      <td><%= link_to 'Delete Forever', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :Class => "delete_user" if admin? %></td>
     </tr>
   <% end %>
   </table>
 </div>
 
-<%= link_to 'Create User Account', new_user_registration_path %>
+<%= link_to 'Create User Account', new_user_registration_path if admin? %>

@@ -1,11 +1,11 @@
 
 <h2>
 	<% if @user.nil? %>
-		<%= current_user.username %>
+		Your
 	<% else %>
-		<%= @user.username %>
+		<%= @user.username %>'s
 	<% end %>
-	's Idols
+	Idols
 </h2>
 
 <% unless @user.nil? %>

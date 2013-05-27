@@ -1,17 +1,7 @@
 <div class="span4">
 	<h1>Metallr</h1>
 
-	<% if user_signed_in? %>
-	  <em>
-	    Welcome <%= current_user.username %>
-	  </em>
-
-	  <div class="row-fluid">
-	    <%= render :partial => 'new', :locals => { :f => @post} %>
-	  </div>
-	<% else %>
-
-	<% end %>
+	<%= render "shared/usernewriff" %>
 </div>
 
 <div class="span6">
@@ -21,6 +11,9 @@
 			<%= render 'shared/post', :post => post %>
 			<% end %>
 			<%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
+		<% elsif controller.action_name == "idols" %>
+			<p>No posts from your idols. Idolize some people who have posted.</p>
+			<p>Use the 'search' box above to find some idols.</p>
 		<% else %>
 			No posts here!
 		<% end %>
