@@ -53,6 +53,9 @@
 				<%= link_to('Logout', destroy_user_session_path, :method => :delete) if user_signed_in?  %>        
 			</li>
 			<li>
+				<%= link_to('About', pages_about_path) %>
+			</li>
+			<li>
 				<%= form_tag("/search/results", :action => "results", :method => "get", :class => "navbar-search pull-left") do %>
 					<%= text_field_tag :keyword, params[:keyword], :class => "search-query", :placeholder => "Search" %>
 				<% end %> 

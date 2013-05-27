@@ -1,5 +1,7 @@
 Metallr::Application.routes.draw do
   
+  get "pages/about"
+
   # posts
   match "/replies" => "posts#replies"
   match "/posts/my" => "posts#my"

@@ -1,15 +1,17 @@
 <% if user_signed_in? %>
-	<em>
-		Welcome <%= current_user.username %>
-	</em>
+	<div class="well">
+		<em>
+			Welcome <%= current_user.username %>
+		</em>
 
-	<div class="row-fluid user-stats">
-		<%= link_to pluralize(current_user.idols.count, "idol"), idols_path %> |
-		<%= link_to pluralize(current_user.groupies.count, "groupie"), groupies_path %>
-	</div>	
+		<div class="row-fluid user-stats">
+			<%= link_to pluralize(current_user.idols.count, "idol"), idols_path %> |
+			<%= link_to pluralize(current_user.groupies.count, "groupie"), groupies_path %>
+		</div>	
 
-	<div class="row-fluid">
-		<%= render :partial => 'new', :locals => { :f => @post} %>
+		<div class="row-fluid">
+			<%= render :partial => 'new', :locals => { :f => @post} %>
+		</div>
 	</div>
 	<% else %>
 

@@ -32,7 +32,9 @@ gem 'figaro'
 gem 'will_paginate', '~> 3.0.0'
 gem 'will_paginate-bootstrap'
 
+gem 'paperclip'
 gem 'redis'
+gem 'haml'
 
 
 # To use ActiveModel has_secure_password
