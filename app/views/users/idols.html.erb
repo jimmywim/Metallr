@@ -1,14 +1,14 @@
 
 <h2>
 	<% if @user.nil? %>
-		current_user.username
+		<%= current_user.username %>
 	<% else %>
 		<%= @user.username %>
 	<% end %>
 	's Idols
 </h2>
 
-<% unless @user == current_user %>
+<% unless @user.nil? %>
 	<%= link_to "All posts by their idols", idols_posts_user_path %>
 <% end %>
 

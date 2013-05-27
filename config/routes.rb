@@ -20,10 +20,10 @@ Metallr::Application.routes.draw do
 
   
   match "users/:id/idols" => "users#idols", :as => "user_idols"
-  #match "users/:id/idols/posts" => "posts#idols", :as => "user_idols_posts"
+  match "users/:id/idols/posts" => "posts#idols", :as => "user_idols_posts"
 
   match "users/:id/groupies" => "users#groupies", :as => "user_groupies"
-  #match "users/:id/groupies/posts" => "posts#groupies", :as => "user_groupies_posts"
+  match "users/:id/groupies/posts" => "posts#groupies", :as => "user_groupies_posts"
   resources :users do
     member do
       get 'idolize'

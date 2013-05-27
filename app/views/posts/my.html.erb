@@ -1,1 +1,5 @@
-<%= render "interactiveposts" %>
+<% unless @post.nil? %>
+	<%= render "interactiveposts" %>
+<% else %>
+	You've not made any riffs yet!
+<% end %>

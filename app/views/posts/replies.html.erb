@@ -1,1 +1,5 @@
-<%= render "interactiveposts" %>
+<% unless @post.nil? %>
+	<%= render "interactiveposts" %>
+<% else %>
+	No replies yet! :(
+<% end %>
