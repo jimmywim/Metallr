@@ -10,23 +10,24 @@
 	</p>
 <% end %>
 
-<div class="idols-panel">
-	<%= pluralize(@user.idols.count, "Idol") %>
+<div class="connections span4 row-fluid">
+	<div class="idols-panel">
+		<%= pluralize(@user.idols.count, "Idol") %>
 
-	<% unless @user.idols.count == 0 %>
-		<%= link_to "Show their idols", user_idols_path %>
-	<% end %>
+		<% unless @user.idols.count == 0 %>
+			<%= link_to "Show their idols", user_idols_path %>
+		<% end %>
+	</div>
+	<div class="groupies-panel">
+		<%= pluralize(@user.groupies.count, "Groupie") %>
+
+		<% unless @user.groupies.count == 0 %>
+			<%= link_to "Show their groupies", user_groupies_path %>
+		<% end %>
+	</div>
 </div>
 
-<div class="groupies-panel">
-	<%= pluralize(@user.groupies.count, "Groupie") %>
-
-	<% unless @user.groupies.count == 0 %>
-		<%= link_to "Show their groupies", user_groupies_path %>
-	<% end %>
-</div>
-
-<div class="action-panel">
+<div class="action-panel span4">
 	<% unless @user === current_user %>
 		<% if @user.idolized_by? current_user %>
 			<%= link_to "Un-idolize!", :controller => "users", :action => "unidolize", :remote => true %>
@@ -36,8 +37,10 @@
 	<% end %>
 </div>
 
-<section id="posts-listing">
-   <% @user.posts.each do |post| %>
-    <%= render 'shared/post', :post => post %>
-   <% end %>
-</section>
+<div class="span8">
+	<section id="posts-listing">
+	   <% @user.posts.each do |post| %>
+	    <%= render 'shared/post', :post => post %>
+	   <% end %>
+	</section>
+</div>

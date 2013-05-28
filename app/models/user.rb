@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_attached_file :avatar, 
-    :styles => { :medium => "300x300>", :thumb => "50x50>>" }, 
+    :styles => { :large => "300x300>", :medium => "100x100", :thumb => "50x50>>" }, 
     :default_url => ":style/default_avatar.png"
 
 

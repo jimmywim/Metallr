@@ -22,24 +22,22 @@
 			</div>
 		<div class="post-actions">
 			<ul class="nav nav-pills">
-				<% unless post.user.nil? or post.user.id == current_user.id %>
-					<li>
-							<a href="#" class="reply_link" 
-								data-reply-to="<%= post.user.username %>"
-								data-reply-post="<%= post.id %>">
-								Reply
-							</a>
-					</li>
-				<% end %>
-
 				<% if user_signed_in? %>
-					<li>
-						<td><%= link_to 'Edit', edit_post_path(post) if admin? or post.user.id == current_user.id %></td>
-					</li>
-					<li>
-						 <td><%= link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => "delete_post" if admin? or post.user.id == current_user.id %></td>
-					</li>
-
+					<% unless post.user.nil? or post.user.id == current_user.id %>
+						<li>
+								<a href="#" class="reply_link" 
+									data-reply-to="<%= post.user.username %>"
+									data-reply-post="<%= post.id %>">
+									Reply
+								</a>
+						</li>
+					<% end %>
+						<li>
+							<td><%= link_to 'Edit', edit_post_path(post) if admin? or post.user.id == current_user.id %></td>
+						</li>
+						<li>
+							 <td><%= link_to 'Delete', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, :remote => true, :class => "delete_post" if admin? or post.user.id == current_user.id %></td>
+						</li>
 				<% end %>
 			</ul>
 		</div>
