@@ -13,9 +13,10 @@
 
   <div class="field">
     <%= f.label :content, "New Riff" %>
-    <%= f.text_area :content, :cols => "70", :rows => "3" %>
+    <%= f.text_area :content, :class => "span12", :rows => "8" %>
   </div>
   <div class="actions">
     <%= f.submit "Create Riff", :class => "btn btn-primary" %>
+    <span class="riff-length">255</span> Characters
   </div>
 <% end %>
