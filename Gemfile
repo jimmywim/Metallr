@@ -35,6 +35,7 @@ gem 'will_paginate-bootstrap'
 gem 'paperclip'
 gem 'redis'
 gem 'haml'
+gem 'rails_autolink'
 
 
 # To use ActiveModel has_secure_password

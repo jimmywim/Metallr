@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap
+//= require linkify
 
 $(document).ready( function() { 
 	$('.delete_post').bind('ajax:success', function() {  

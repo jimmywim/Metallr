@@ -13,3 +13,8 @@ $ ->
 		else
 			$('.riff-length').removeClass('riff-length-overflow')
 			$('.actions input').removeAttr('disabled')
+
+	$('.post_content').linkify({hashtagUrlBuilder: toHashTagUrl, target:"_blank"})
+
+toHashTagUrl = (kw) ->
+	return '/search/results?keyword=' + kw

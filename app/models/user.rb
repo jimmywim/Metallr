@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   ROLES = %w[admin mod user banned]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

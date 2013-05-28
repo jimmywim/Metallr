@@ -16,8 +16,8 @@
 						<%= link_to post.created_at.strftime("%m/%d/%Y - %I:%M %p"), post %>
 					</em>
 				</span>
-				<div>
-					<%= post.content %>
+				<div class="post_content">
+					<%= auto_link post.content %>
 				</div>
 			</div>
 		<div class="post-actions">
