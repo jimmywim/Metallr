@@ -12,13 +12,19 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :role,
-          :current_password
+          :current_password, :avatar
+
   # attr_accessible :title, :body
 
   validates :password, :presence => true, :on => :create 
   #validates_confirmation_of :password, :allow_blank => true, :on => :create 
 
   has_many :posts
+  has_attached_file :avatar, 
+    :styles => { :medium => "300x300>", :thumb => "50x50>>" }, 
+    :default_url => ":style/default_avatar.png"
+
+
 
   # This bunch of methods handle user friendships using Redis.
   # Followers of a user = groupies

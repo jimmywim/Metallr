@@ -1,3 +1,24 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post-actions .nav
+{
+	margin-bottom: 0;
+}
+
+article
+{
+	margin-bottom: 5px;
+}
+
+article .well 
+{
+	padding-bottom: 5px;
+}
+
+.riff_user_pic
+{
+	float: left;
+	margin-right: 10px;
+}

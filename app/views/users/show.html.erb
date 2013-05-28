@@ -1,16 +1,14 @@
 <h3>
+	<%= image_tag @user.avatar.url(:medium) %>
 	<%= @user.username %>'s Profile
 </h3>
 
 
-<p>
-	Role:
-	<% if @user.role.empty? %>
-		No Roles!
-	<% else %>
-		<%= @user.role %>	
-	<% end %>
-</p>
+<% if admin? %>
+	<p>
+		Role: <%= @user.role unless @user.role.empty? %>	
+	</p>
+<% end %>
 
 <div class="idols-panel">
 	<%= pluralize(@user.idols.count, "Idol") %>
