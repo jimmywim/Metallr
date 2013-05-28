@@ -7,7 +7,11 @@ Metallr::Application.routes.draw do
   match "/posts/my" => "posts#my"
   match "/posts/idols" => "posts#idols"
   match "/posts/groupies" => "posts#groupies"
-  resources :posts
+  match "/posts/flagged" => "posts#flagged"
+
+  resources :posts do
+    get 'flag'
+  end
 
 
   # users

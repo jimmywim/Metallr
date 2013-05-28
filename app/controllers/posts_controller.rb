@@ -64,6 +64,28 @@ class PostsController < ApplicationController
     end
   end
 
+  # GET /posts/flagged
+  def flagged
+    @posts = Post::flagged
+  end
+
+  # THIS TOGGLES THE FLAG ON THE POST
+  # it's just easier to implement that way
+  # GET /posts/1/flag
+  def flag
+    @post = Post.find(params[:post_id])
+
+    if (@post.flagged?)
+      @post.unflag!
+    else
+      @post.flag!
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /posts/new
   # GET /posts/new.json
   def new
@@ -119,6 +141,11 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post = Post.find(params[:id])
+
+    if (@post.flagged?)
+      @post.unflag
+    end
+    
     @post.destroy
 
     respond_to do |format|

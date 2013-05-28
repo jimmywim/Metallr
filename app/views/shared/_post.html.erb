@@ -1,5 +1,4 @@
 <article>
-
 	<div class="well">
 			<%= image_tag post.user.avatar.url(:thumb), :class => "riff_user_pic" %>
 			<div class="riff-detail">
@@ -16,6 +15,9 @@
 						<%= link_to post.created_at.strftime("%m/%d/%Y - %I:%M %p"), post %>
 					</em>
 				</span>
+				<span class="post-flag">
+					<%= link_to "", post_flag_path(post.id), :remote => true, :class => "icon-flag glyph" %>
+				</span>
 				<div class="post_content">
 					<%= auto_link post.content %>
 				</div>
@@ -25,11 +27,11 @@
 				<% if user_signed_in? %>
 					<% unless post.user.nil? or post.user.id == current_user.id %>
 						<li>
-								<a href="#" class="reply_link" 
-									data-reply-to="<%= post.user.username %>"
-									data-reply-post="<%= post.id %>">
-									Reply
-								</a>
+							<a href="#" class="reply_link" 
+								data-reply-to="<%= post.user.username %>"
+								data-reply-post="<%= post.id %>">
+								Reply
+							</a>
 						</li>
 					<% end %>
 						<li>

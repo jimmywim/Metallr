@@ -1,0 +1,17 @@
+<h3>Riffs flagged for review</h3>
+
+<div class="span6">
+	<section id="posts-listing">
+		<% if @posts.count > 0 %>
+			<% @posts.each do |post| %>
+			<%= render 'shared/post', :post => post %>
+			<% end %>
+			<%= will_paginate @posts unless true %>
+		<% elsif controller.action_name == "idols" %>
+			<p>No posts from your idols. Idolize some people who have posted.</p>
+			<p>Use the 'search' box above to find some idols.</p>
+		<% else %>
+			No posts here!
+		<% end %>
+	</section>
+</div>

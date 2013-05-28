@@ -10,6 +10,7 @@ class Ability
         can :manage, :all
     elsif user.role == "user"
         can [:read, :idols, :groupies, :idolize, :unidolize], User
+        can [:flag], Post
     end
 
     #if user.has_role? :admin
