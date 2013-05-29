@@ -16,5 +16,26 @@ $ ->
 
 	$('.post_content').linkify({hashtagUrlBuilder: toHashTagUrl, target:"_blank"})
 
+	if document.location.href[document.location.href.length-1] == '/'
+		setInterval pollNewPosts, 5000
+
+sinceDate = new Date
+
 toHashTagUrl = (kw) ->
 	return '/search/results?keyword=' + kw
+
+pollNewPosts = ->
+	sinceDate = new Date sinceDate - 60
+	month = sinceDate.getUTCMonth() + 1
+	hours = sinceDate.getUTCHours()
+	minutes = sinceDate.getUTCMinutes()
+	seconds = sinceDate.getUTCSeconds()
+
+	dateformat = sinceDate.getUTCDate() + '/' + month + '/' + sinceDate.getUTCFullYear() + ' ' + hours + ':' + minutes + ':' + seconds
+	console.log dateformat
+
+	$.ajax '/posts.js?since=' + dateformat,
+		type: 'GET'
+		success: (data, textStatus, jqXhr) ->
+			sinceDate = new Date
+	

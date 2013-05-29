@@ -1,0 +1,7 @@
+
+<% @posts.each do |p| %>
+var newRowContent = $("<%= escape_javascript(render :partial => 'shared/post', :locals => {:post => p, :newpost => true} ) %>");
+
+$(newRowContent).insertBefore('#posts-listing > article:first').slideDown();
+
+<% end %>

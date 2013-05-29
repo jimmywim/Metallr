@@ -2,12 +2,18 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    if params[:since].nil?
+      @posts = Post.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    else
+      @posts = Post.where("created_at >= ?", DateTime.parse(params[:since])).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    end
+
     @post = Post.new
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @posts }
+      format.js
     end
   end
 
@@ -145,7 +151,7 @@ class PostsController < ApplicationController
     if (@post.flagged?)
       @post.unflag
     end
-    
+
     @post.destroy
 
     respond_to do |format|

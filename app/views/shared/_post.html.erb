@@ -1,27 +1,31 @@
 <article>
-	<div class="well">
-			<%= image_tag post.user.avatar.url(:thumb), :class => "riff_user_pic" %>
-			<div class="riff-detail">
-				<span class="post-user">
-					<% if post.user.nil? %>
-						<strong>Unknown user</strong>
-					<% else %>
-						<%= link_to post.user.username, post.user %>
-					<% end %>
-					:
-				</span>
-				<span class="post-timestamp">
-					<em>
-						<%= link_to post.created_at.strftime("%m/%d/%Y - %I:%M %p"), post %>
-					</em>
-				</span>
-				<span class="post-flag">
-					<%= link_to "", post_flag_path(post.id), :remote => true, :class => "icon-flag glyph" %>
-				</span>
-				<div class="post_content">
-					<%= auto_link post.content %>
-				</div>
+	<% unless defined?(newpost) %>
+		<div class="well">
+	<% else %>
+		<div class="well new-post">
+	<% end %>
+		<%= image_tag post.user.avatar.url(:thumb), :class => "riff_user_pic" %>
+		<div class="riff-detail">
+			<span class="post-user">
+				<% if post.user.nil? %>
+					<strong>Unknown user</strong>
+				<% else %>
+					<%= link_to post.user.username, post.user %>
+				<% end %>
+				:
+			</span>
+			<span class="post-timestamp">
+				<em>
+					<%= link_to post.created_at.strftime("%m/%d/%Y - %I:%M %p"), post %>
+				</em>
+			</span>
+			<span class="post-flag">
+				<%= link_to "", post_flag_path(post.id), :remote => true, :class => "icon-flag glyph" %>
+			</span>
+			<div class="post_content">
+				<%= auto_link post.content %>
 			</div>
+		</div>
 		<div class="post-actions">
 			<ul class="nav nav-pills">
 				<% if user_signed_in? %>

@@ -1,5 +1,5 @@
-<% if user_signed_in? %>
-	<div class="well">
+<div class="well">
+	<% if user_signed_in? %>
 		<em>
 			Welcome <%= current_user.username %>
 		</em>
@@ -14,7 +14,12 @@
 		<div class="row-fluid">
 			<%= render :partial => 'new', :locals => { :f => @post} %>
 		</div>
-	</div>
 	<% else %>
+			<p>Metallr is a social network for use by metalheads.</p>
 
-<% end %>
+			<p>It is a micro-blogging platform, which allows slightly longer messages than some may be used to (255 characters max), and allows flexible browsing of 'riffs' made by other users.</p>
+
+			<%= link_to "Create a free account now", new_user_registration_path %> or 
+			<%= link_to "Log In", new_user_session_path %>
+	<% end %>
+</div>
