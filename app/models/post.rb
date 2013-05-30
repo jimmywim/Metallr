@@ -37,8 +37,32 @@ class Post < ActiveRecord::Base
 		Post.where(:id => post_ids)
 	end
 
+	# log this riff into Redis so we can get trending topics
+	def log_trending
+		# strip out the noisewords/stopwords
+		@unpunctuated_content = self.content.downcase.gsub(/[^a-z# ]/, '').scan(/(?:(?<=\s)|^)#(\.*[A-Za-z_]+\w*)/i).flatten
+
+		logger.debug @unpunctuated_content
+		#@words = @unpunctuated_content.split.delete_if{|x| $noise_words.include?(x.downcase)}
+
+		unless ($redis.exists(self.redis_key_trending))
+			$redis.zadd(self.redis_key_trending, 1, '')
+			$redis.expire(self.redis_key_trending, 3600)
+		end
+
+		@unpunctuated_content.each do |hashtag|
+			$redis.zincrby(self.redis_key_trending, 1, hashtag)
+		end
+		
+	end
+
 	# Utility funciton to get a redis key
 	def redis_key
 		"flagged_posts"
+	end
+
+	def redis_key_trending
+		@curTimeStr = DateTime.current.strftime("%Y-%m-%d-%H")
+		"trending_topics:#{@curTimeStr}"
 	end
 end

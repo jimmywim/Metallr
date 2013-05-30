@@ -1,0 +1,1 @@
+$noise_words = File.read("config/noisewords").split(",").map(&:strip)

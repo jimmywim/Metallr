@@ -28,12 +28,18 @@ class PostsController < ApplicationController
   end
 
   def replies
-    @posts = Post.where("content LIKE ?", "%#{current_user.username}%").order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    if params[:since].nil?
+      @posts = Post.where("content LIKE ?", "%#{current_user.username}%").order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    else
+      @posts = Post.where("content LIKE ? AND created_at >= ?", "%#{current_user.username}%", DateTime.parse(params[:since])).order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+    end
+
     @post = Post.new
 
     respond_to do |format|
       format.html # replies.html.erb
       format.json { render :json => @posts }
+      format.js
     end
   end
 
@@ -113,6 +119,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.user = current_user
+    
+    @post.log_trending
 
     respond_to do |format|
       if @post.save

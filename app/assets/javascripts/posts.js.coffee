@@ -16,15 +16,22 @@ $ ->
 
 	$('.post_content').linkify({hashtagUrlBuilder: toHashTagUrl, target:"_blank"})
 
-	if document.location.href[document.location.href.length-1] == '/'
-		setInterval pollNewPosts, 5000
+	curUrl = document.location.href[document.location.href.length-1]
+#	if curUrl == '/'
+#		setInterval -> 
+#			pollNewPosts '/posts'
+#		, 20000
+#	else if curUrl = '/replies'
+#		setInterval ->
+#			pollNewPosts '/replies'
+#		, 20000
 
 sinceDate = new Date
 
 toHashTagUrl = (kw) ->
 	return '/search/results?keyword=' + kw
 
-pollNewPosts = ->
+pollNewPosts = (url) ->
 	sinceDate = new Date sinceDate - 60
 	month = sinceDate.getUTCMonth() + 1
 	hours = sinceDate.getUTCHours()
@@ -34,7 +41,7 @@ pollNewPosts = ->
 	dateformat = sinceDate.getUTCDate() + '/' + month + '/' + sinceDate.getUTCFullYear() + ' ' + hours + ':' + minutes + ':' + seconds
 	console.log dateformat
 
-	$.ajax '/posts.js?since=' + dateformat,
+	$.ajax url + '.js?since=' + dateformat,
 		type: 'GET'
 		success: (data, textStatus, jqXhr) ->
 			sinceDate = new Date
