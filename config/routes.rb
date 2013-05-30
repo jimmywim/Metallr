@@ -46,6 +46,9 @@ Metallr::Application.routes.draw do
   # root 
   get "home/index"
 
+  # trending 
+  match "/trending/topics" => "trending#topics"
+
   authenticated :user do
     root :to => "posts#idols"
   end

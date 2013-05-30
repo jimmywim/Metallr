@@ -14,9 +14,10 @@ $ ->
 			$('.riff-length').removeClass('riff-length-overflow')
 			$('.actions input').removeAttr('disabled')
 
-	$('.post_content').linkify({hashtagUrlBuilder: toHashTagUrl, target:"_blank"})
+	$('.post_content').linkify({hashtagUrlBuilder: toHashTagUrl})
 
 	curUrl = document.location.href[document.location.href.length-1]
+
 #	if curUrl == '/'
 #		setInterval -> 
 #			pollNewPosts '/posts'
@@ -45,4 +46,5 @@ pollNewPosts = (url) ->
 		type: 'GET'
 		success: (data, textStatus, jqXhr) ->
 			sinceDate = new Date
+			
 	

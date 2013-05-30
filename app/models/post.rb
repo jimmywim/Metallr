@@ -47,7 +47,7 @@ class Post < ActiveRecord::Base
 
 		unless ($redis.exists(self.redis_key_trending))
 			$redis.zadd(self.redis_key_trending, 1, '')
-			$redis.expire(self.redis_key_trending, 3600)
+			$redis.expire(self.redis_key_trending, 7200)
 		end
 
 		@unpunctuated_content.each do |hashtag|

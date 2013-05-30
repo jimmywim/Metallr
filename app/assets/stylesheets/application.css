@@ -18,7 +18,8 @@
 .post-user a,
 .post-user a:link,
 .post-user a:visited,
-article a
+article a,
+.trending-topics a
 {
 	font-color: black;
 	font-weight: bold;
